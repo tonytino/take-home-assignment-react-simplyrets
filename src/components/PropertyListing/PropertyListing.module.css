@@ -33,3 +33,9 @@
 .Address {
   margin-bottom: 0.25rem;
 }
+
+.DateOfListing {
+  /* A bit darker than in the design for a11y contrast compliance */
+  color: #6b7280;
+  margin-bottom: 0;
+}
