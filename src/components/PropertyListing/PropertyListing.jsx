@@ -1,6 +1,6 @@
 import heartFill from 'assets/heart-fill.svg';
 import heartStroke from 'assets/heart-stroke.svg';
-import { formatFeatures, formatListPrice } from './helpers';
+import { formatAddress, formatFeatures, formatListPrice } from './helpers';
 import styles from './PropertyListing.module.css';
 
 /**
@@ -9,10 +9,12 @@ import styles from './PropertyListing.module.css';
  */
 export function PropertyListing(props) {
   const { isFavorited = false, listing = {}, onFavorite = () => {} } = props;
-  const { listPrice = 0, photos = [], property = {} } = listing;
+  const { address = {}, listPrice = 0, photos = [], property = {} } = listing;
   const photoSrc = photos[0];
 
   const favoriteToggleButtonLabel = `${isFavorited ? 'Remove from' : 'Add to'} your favorites`;
+
+  const formattedAddress = formatAddress(address);
 
   return (
     <div className={styles.PropertyListing}>
@@ -29,7 +31,7 @@ export function PropertyListing(props) {
       </button>
 
       <img
-        alt={'TODO'}
+        alt={`Property located at ${formattedAddress}`}
         className={styles.Image}
         height={240}
         src={photoSrc}
@@ -39,6 +41,8 @@ export function PropertyListing(props) {
       <p className={styles.Features}>{formatFeatures(property)}</p>
 
       <p className={styles.ListPrice}>{formatListPrice(listPrice)}</p>
+
+      <p className={styles.Address}>{formattedAddress}</p>
     </div>
   );
 }
