@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { fetchWithCache } from 'utils';
-// import styles from './PropertyListingsPage.module.css';
+import { PropertyListing } from 'components';
+import styles from './PropertyListingsPage.module.css';
 
 /**
  * Fetches property listings data for <PropertyListingsPage />
@@ -26,7 +27,23 @@ export async function propertyListingsPageLoader() {
  */
 export function PropertyListingsPage() {
   const properties = useLoaderData();
-  console.log(properties);
 
-  return <h1>Property Listings Page</h1>;
+  return (
+    <div className={styles.PropertyListings}>
+      {properties.map((property) => {
+        const { mlsId } = property;
+
+        return (
+          <PropertyListing
+            isFavorited={false}
+            key={mlsId}
+            listing={property}
+            onFavorite={() => {
+              console.log('TODO');
+            }}
+          />
+        );
+      })}
+    </div>
+  );
 }
