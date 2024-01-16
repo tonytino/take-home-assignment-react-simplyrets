@@ -15,4 +15,11 @@
 
 .Image {
   border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.Features {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
