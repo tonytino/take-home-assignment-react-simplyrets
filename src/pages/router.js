@@ -3,7 +3,7 @@ import {
   createRoutesFromElements,
   Route,
 } from 'react-router-dom';
-import { ErrorPage } from 'pages';
+import { ErrorPage, HomePage, homePageLoader } from 'pages';
 import { Layout } from 'components';
 
 /**
@@ -12,7 +12,9 @@ import { Layout } from 'components';
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<Layout />} errorElement={<ErrorPage />}>
-      <Route path="/" />
+      <Route path="/">
+        <Route element={<HomePage />} index loader={homePageLoader} />
+      </Route>
     </Route>,
   ),
 );
