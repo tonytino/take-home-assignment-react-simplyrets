@@ -1,0 +1,16 @@
+.PropertyListing {
+  max-width: 320px;
+  position: relative;
+}
+
+.FavoriteToggle {
+  background: transparent;
+  border: none;
+  position: absolute;
+  right: 4px;
+  top: 4px;
+}
+
+.Image {
+  border-radius: 4px;
+}
