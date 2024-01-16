@@ -3,7 +3,13 @@ import {
   createRoutesFromElements,
   Route,
 } from 'react-router-dom';
-import { ErrorPage, HomePage, homePageLoader } from 'pages';
+import {
+  ErrorPage,
+  HomePage,
+  homePageLoader,
+  PropertyListingsPage,
+  propertyListingsPageLoader,
+} from 'pages';
 import { Layout } from 'components';
 
 /**
@@ -14,6 +20,23 @@ export const router = createBrowserRouter(
     <Route element={<Layout />} errorElement={<ErrorPage />}>
       <Route path="/">
         <Route element={<HomePage />} index loader={homePageLoader} />
+
+        <Route path="property-listings">
+          <Route
+            element={<PropertyListingsPage />}
+            index
+            loader={propertyListingsPageLoader}
+          />
+
+          {/* Example Property Listing Page Route
+            <Route
+              element={<PropertyListing />}
+              errorElement={<ErrorPage />}
+              loader={propertyListingLoader}
+              path=":listingId"
+            />
+          */}
+        </Route>
       </Route>
     </Route>,
   ),
