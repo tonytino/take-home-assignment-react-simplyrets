@@ -1,8 +1,14 @@
 import * as React from 'react';
 import { useLoaderData } from 'react-router-dom';
-import { fetchWithCache } from 'utils';
+import {
+  fetchWithCache,
+  getLocalStorageItem,
+  setLocalStorageItem,
+} from 'utils';
 import { PropertyListing } from 'components';
 import styles from './PropertyListingsPage.module.css';
+
+const FAVORITES_LOCAL_STORAGE_KEY = 'Side::Favorites';
 
 /**
  * Fetches property listings data for <PropertyListingsPage />
@@ -28,18 +34,30 @@ export async function propertyListingsPageLoader() {
 export function PropertyListingsPage() {
   const properties = useLoaderData();
 
+  const [favoritePropertyListings, setFavoritePropertyListings] =
+    React.useState(getLocalStorageItem(FAVORITES_LOCAL_STORAGE_KEY) ?? []);
+
   return (
     <div className={styles.PropertyListings}>
       {properties.map((property) => {
         const { mlsId } = property;
+        const isFavorited = favoritePropertyListings.includes(mlsId);
 
         return (
           <PropertyListing
-            isFavorited={false}
+            isFavorited={isFavorited}
             key={mlsId}
             listing={property}
             onFavorite={() => {
-              console.log('TODO');
+              setFavoritePropertyListings((favorites) => {
+                const newFavorites = isFavorited
+                  ? favorites.filter((favorite) => favorite !== mlsId)
+                  : [...favorites, mlsId];
+
+                setLocalStorageItem(FAVORITES_LOCAL_STORAGE_KEY, newFavorites);
+
+                return newFavorites;
+              });
             }}
           />
         );

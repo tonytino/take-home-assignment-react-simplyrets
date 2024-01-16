@@ -1,4 +1,6 @@
 .PropertyListing {
+  margin-left: auto;
+  margin-right: auto;
   max-width: 320px;
   position: relative;
 }
