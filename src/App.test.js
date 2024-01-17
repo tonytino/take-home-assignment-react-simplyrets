@@ -1,11 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const heading = screen.getByRole(
-    'heading',
-    /Side React Take-home Assignment/i,
-  );
-  expect(heading).toBeInTheDocument();
+describe('<App />', () => {
+  test('renders without issue', () => {
+    render(<App />);
+
+    expect(screen.getByText(/Side/)).toBeInTheDocument();
+  });
 });
